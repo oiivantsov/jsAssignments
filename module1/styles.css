@@ -2,6 +2,8 @@ body {
     font-size: 1.5rem;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #CADCFC;
+    color: #00246B;
 }
 
 ul {
@@ -16,7 +18,7 @@ li {
 
 .navitem {
     display: inline-block; 
-    padding: 0.3rem 20rem;
+    padding: 0.3rem 10%;
 }
 
 #assignment {
