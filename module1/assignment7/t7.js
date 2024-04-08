@@ -5,6 +5,7 @@ if (isNaN(dicesNum) || dicesNum <= 0) {
     console.error("Invalid input. Please enter a valid number greater than 0.");
 } else {
     let numSum = 0;
+    const dices = document.createElement("div");
     const assignmentSection = document.getElementById("assignment");
 
     for (let i = 0; i < dicesNum; i++) {
@@ -13,12 +14,14 @@ if (isNaN(dicesNum) || dicesNum <= 0) {
 
         const pNumInfo = document.createElement("p");
         pNumInfo.textContent = `Dice #${i + 1}: ${dice}`;
-        assignmentSection.appendChild(pNumInfo);
+        dices.appendChild(pNumInfo);
     }
 
     const pResult = document.createElement("p");
     pResult.textContent = `The sum of all ${dicesNum} dices is ${numSum}.`;
+
     assignmentSection.appendChild(pResult);
+    assignmentSection.appendChild(dices);
 }
 
 function randomIntFromInterval(min, max) {
