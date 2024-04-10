@@ -1,32 +1,83 @@
 "use strict";
 
-const dicesNum = parseInt(window.prompt("Please enter the number of dice."));
-if (isNaN(dicesNum) || dicesNum <= 0) {
-    console.error("Invalid input. Please enter a valid number greater than 0.");
-} else {
-    let numSum = 0;
-    const dices = document.createElement("div");
-    const assignmentSection = document.getElementById("assignment");
+function elections() {
 
-    for (let i = 0; i < dicesNum; i++) {
-        const dice = randomIntFromInterval(1, 6);
-        numSum += dice;
+    const candidates = [];
+    const candidatesNames = [];
+    const numberOfCandidates = parseInt(prompt("Enter the number of candidates."));
 
-        const pNumInfo = document.createElement("p");
-        pNumInfo.textContent = `Dice #${i + 1}: ${dice}`;
-        dices.appendChild(pNumInfo);
+    for (let i = 1; i <= numberOfCandidates; i++) {
+
+        let candidateName;
+        let candidateExists = false;
+
+        do {
+
+            candidateName = toCapCase(prompt(`Enter the name for candidate ${i}.`));
+
+            if (candidatesNames.includes(candidateName)) {
+                alert("A candidate with that name is already registered, try again.");
+            }
+            else {
+
+                candidatesNames.push(candidateName);
+
+                candidates.push({
+                    name: candidateName,
+                    votes: 0,
+                });
+
+                candidateExists = true;
+
+            }
+
+        } while (!candidateExists);
     }
 
-    const pResult = document.createElement("p");
-    pResult.textContent = `The sum of all ${dicesNum} dices is ${numSum}.`;
+    const numberOfVoters = parseInt(prompt("Enter the number of voters."));
 
-    assignmentSection.appendChild(pResult);
-    assignmentSection.appendChild(dices);
-}
+    for (let i = 1; i <= numberOfVoters; i++) {
 
-function randomIntFromInterval(min, max) {
-    if (min > max) {
-        [min, max] = [max, min];
+        const voteName = toCapCase(prompt(`Voter ${i}, please enter the name of your candidate.`));
+
+        if (candidatesNames.includes(voteName)) {
+
+            for (let candidate of candidates) {
+                if (candidate.name === voteName) {
+                    candidate.votes++;
+                }
+            }
+
+        }
+
     }
-    return Math.floor(Math.random() * (max - min + 1) + min);
+
+    candidates.sort((a, b) => b.votes - a.votes);
+
+    if (candidates[0].votes !== candidates[1].votes) {
+        console.log(`The winner is ${candidates[0].name} with ${candidates[0].votes} vote(s).`);
+    }
+
+    else {
+        console.log(`We need a second round! Several candidates received the same number of votes.`);
+    }
+
+    console.log("Results:");
+    for (let candidate of candidates) {
+        console.log(candidate.name + ": " + candidate.votes + " votes");
+    }
+
 }
+
+function toCapCase(myString) {
+    const firstLetter = myString.charAt(0).toUpperCase();
+    const remainingLetters = myString.slice(1).toLowerCase();
+    return firstLetter + remainingLetters;
+
+}
+
+document.getElementById("startButton").addEventListener("click", () => {
+    console.clear();
+    document.getElementById("target").innerHTML = "Check the console for results";
+    elections();
+});
