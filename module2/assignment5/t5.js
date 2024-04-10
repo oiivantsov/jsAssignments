@@ -1,32 +1,25 @@
 "use strict";
 
-const dicesNum = parseInt(window.prompt("Please enter the number of dice."));
-if (isNaN(dicesNum) || dicesNum <= 0) {
-    console.error("Invalid input. Please enter a valid number greater than 0.");
-} else {
-    let numSum = 0;
-    const dices = document.createElement("div");
-    const assignmentSection = document.getElementById("assignment");
+const numbers = [];
+let userNum;
+let inputLoop = true;
 
-    for (let i = 0; i < dicesNum; i++) {
-        const dice = randomIntFromInterval(1, 6);
-        numSum += dice;
+do {
+    userNum = parseInt(prompt("Enter your number.\nIf it's previously entered, operation will be stopped."));
 
-        const pNumInfo = document.createElement("p");
-        pNumInfo.textContent = `Dice #${i + 1}: ${dice}`;
-        dices.appendChild(pNumInfo);
+    if (isNaN(userNum)) {
+        alert("Please enter a valid number.");
+    } else if (numbers.includes(userNum)) {
+        alert("The number has already been given, operation stopped.");
+        inputLoop = false;
+    } else {
+        numbers.push(userNum);
     }
 
-    const pResult = document.createElement("p");
-    pResult.textContent = `The sum of all ${dicesNum} dices is ${numSum}.`;
+} while (inputLoop);
 
-    assignmentSection.appendChild(pResult);
-    assignmentSection.appendChild(dices);
-}
+numbers.sort((a, b) => a - b);
 
-function randomIntFromInterval(min, max) {
-    if (min > max) {
-        [min, max] = [max, min];
-    }
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
+numbers.forEach(num => {
+    console.log(num);
+});
