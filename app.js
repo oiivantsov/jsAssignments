@@ -13,7 +13,7 @@ for (let i = 1; i <= 10; i++) {
 
 // mod3
 for (let i = 1; i <= 11; i++) {
-    document.querySelector(".mod3").innerHTML += `<li><a href="module3/assignment${i}/t${i}.html">Assignment ${i}</a></li>`;
+    document.querySelector(".mod3").innerHTML += `<li><a href="module3/t${i}/${i}.html">Assignment ${i}</a> ✔️</li>`;
 }
 
 
