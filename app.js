@@ -19,7 +19,13 @@ for (let i = 1; i <= 11; i++) {
 
 // mod4
 for (let i = 1; i <= 7; i++) {
-    document.querySelector(".mod4").innerHTML += `<li><a href="module4/assignment${i}/t${i}.html">Assignment ${i}</a></li>`;
+    if (i !== 7) {
+        document.querySelector(".mod4").innerHTML += `<li><a href="module4/t${i}/${i}.html">Assignment ${i}</a> ✔️</li>`;
+    }
+    else {
+        document.querySelector(".mod4").innerHTML += `<li><a href="module4/t${i}/${i}.html">Assignment ${i}</a> 😖</li>`;
+    }
+    
 }
 
 
